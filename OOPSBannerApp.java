@@ -1,20 +1,52 @@
 public class OOPSBannerApp {
 
+    static String[] getOPattern() {
+        return new String[]{
+            " *****  ",
+            "*     * ",
+            "*     * ",
+            "*     * ",
+            "*     * ",
+            "*     * ",
+            " *****  "
+        };
+    }
+
+    static String[] getPPattern() {
+        return new String[]{
+            "******  ",
+            "*     * ",
+            "*     * ",
+            "******  ",
+            "*       ",
+            "*       ",
+            "*       "
+        };
+    }
+
+    static String[] getSPattern() {
+        return new String[]{
+            " *****  ",
+            "*     * ",
+            "*       ",
+            " *****  ",
+            "      * ",
+            "*     * ",
+            " *****  "
+        };
+    }
+
     public static void main(String[] args) {
 
-        String[] lines = {
-            String.join("", " *****  ", " ***** ", " ******  ", "  ***** "),
-            String.join("", "*     * ", "*     * ", "*     * ", "*      *"),
-            String.join("", "*     * ", "*     * ", "*     * ", "*"),
-            String.join("", "*     * ", "*     * ", "******   ", " *****     "),
-            String.join("", "*     * ", "*     * ", "* ", "             *     "),
-            String.join("", "*     * ", "*     * ", "* ", "       *     *     "),
-        String.join("", " *****  ", " ***** ", " * ", "        ***** "),
-        };
+        String[] O = getOPattern();
+        String[] P = getPPattern();
+        String[] S = getSPattern();
 
-        // Enhanced for loop to print banner
-        for (String line : lines) {
-            System.out.println(line);
+        for (int i = 0; i < 7; i++) {
+            System.out.println(O[i] + "  " +
+                               O[i] + "  " +
+                               P[i] + "  " +
+                               S[i]);
         }
     }
 }
