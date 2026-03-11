@@ -1,52 +1,119 @@
 public class OOPSBannerApp {
 
-    static String[] getOPattern() {
-        return new String[]{
-            " *****  ",
-            "*     * ",
-            "*     * ",
-            "*     * ",
-            "*     * ",
-            "*     * ",
-            " *****  "
-        };
+    /**
+     * CharacterPatternMap – Inner class for storing character-to-pattern mappings
+     */
+    static class CharacterPatternMap {
+
+        Character character;
+        String[] pattern;
+
+        public CharacterPatternMap(Character character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public Character getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
     }
 
-    static String[] getPPattern() {
-        return new String[]{
-            "******  ",
-            "*     * ",
-            "*     * ",
-            "******  ",
-            "*       ",
-            "*       ",
-            "*       "
-        };
+    /**
+     * Create CharacterPatternMap array
+     */
+    public static CharacterPatternMap[] createCharacterPatternMaps() {
+
+        CharacterPatternMap[] charMaps = new CharacterPatternMap[4];
+
+        charMaps[0] = new CharacterPatternMap('O', new String[]{
+                " **** ",
+                "*    *",
+                "*    *",
+                "*    *",
+                "*    *",
+                "*    *",
+                " **** "
+        });
+
+        charMaps[1] = new CharacterPatternMap('P', new String[]{
+                "**** ",
+                "*    *",
+                "*    *",
+                "**** ",
+                "*    ",
+                "*    ",
+                "*    "
+        });
+
+        charMaps[2] = new CharacterPatternMap('S', new String[]{
+                "  ****",
+                "*     *",
+                "*      ",
+                "  ****",
+                "       *",
+                " *     *",
+                "  **** "
+        });
+
+        charMaps[3] = new CharacterPatternMap(' ', new String[]{
+                "     ",
+                "     ",
+                "     ",
+                "     ",
+                "     ",
+                "     ",
+                "     "
+        });
+
+        return charMaps;
     }
 
-    static String[] getSPattern() {
-        return new String[]{
-            " *****  ",
-            "*     * ",
-            "*       ",
-            " *****  ",
-            "      * ",
-            "*     * ",
-            " *****  "
-        };
+    /**
+     * Get pattern for a character
+     */
+    public static String[] getCharacterPattern(char ch, CharacterPatternMap[] charMaps) {
+
+        for (CharacterPatternMap map : charMaps) {
+            if (map.getCharacter() == ch) {
+                return map.getPattern();
+            }
+        }
+
+        return getCharacterPattern(' ', charMaps);
     }
 
-    public static void main(String[] args) {
-
-        String[] O = getOPattern();
-        String[] P = getPPattern();
-        String[] S = getSPattern();
+    /**
+     * Print message as banner
+     */
+    public static void printMessage(String message, CharacterPatternMap[] charMaps) {
 
         for (int i = 0; i < 7; i++) {
-            System.out.println(O[i] + "  " +
-                               O[i] + "  " +
-                               P[i] + "  " +
-                               S[i]);
+
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : message.toCharArray()) {
+
+                String[] pattern = getCharacterPattern(ch, charMaps);
+                line.append(pattern[i]).append("  ");
+            }
+
+            System.out.println(line);
         }
+    }
+
+    /**
+     * Main method
+     */
+    public static void main(String[] args) {
+
+        CharacterPatternMap[] charMaps = createCharacterPatternMaps();
+
+        String message = "OOPS";
+
+        printMessage(message, charMaps);
     }
 }
